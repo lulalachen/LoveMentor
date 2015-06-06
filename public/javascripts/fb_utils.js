@@ -1,4 +1,6 @@
 var accessToken;
+var friendList;
+var selectedId;
 
 function FBinit() {
 	FB.init({
@@ -16,11 +18,12 @@ function FBlogin() {
      		console.log('Welcome!  Fetching your information.... ');
      		FB.api('/me', function(response) {
        			console.log('Good to see you, ' + response.name + '.');
+				FBqueryFriendList();
      		});
 	    } else {
 	    	console.log('User cancelled login or did not fully authorize.');
 	    }
-	}, {scope: 'email, user_friends'});
+	}, {scope: 'email, user_friends, read_mailbox, user_photos'});
 }
 
 function FBlogout() {
@@ -30,10 +33,25 @@ function FBlogout() {
 }
 
 function FBqueryFriendList() {
-	console.log(accessToken);
-	FB.api('/me/taggable_friends?limit=25', function(response) {
+	FB.api('/me/taggable_friends?limit=1', function(response) {
+        friendList = [];
+        for (var i = 0; i < response.data.length; i++) {
+        	console.log(response.data);
+        	friendList[i] = [];
+            friendList[i][0] = response.data[i].id;
+            friendList[i][1] = response.data[i].name;
+            friendList[i][2] = response.data[i].picture.data.url;
+            //console.log(friendList[i]);
+            //friendList[i][2] = "<img src = '" + friendList[i][2] + "'>";
+            //document.getElementById('result_friends').innerHTML = friendList[i][2];
+        }
+    });
+}
+
+function FBqueryInbox() {
+	FB.api('/me/inbox', function(response) {
 		console.log(response);
-        var result_holder = document.getElementById('result_friends');
+        var selected = document.getElementById('selected_friend');
 
         var results = '';
         for (var i = 0; i < response.data.length; i++) {
@@ -43,4 +61,7 @@ function FBqueryFriendList() {
         // and display them at our holder element
         result_holder.innerHTML = '<h2>Result list of your friends:</h2>' + results;
     });
+}
+
+function submitSelectedFriend() {
 }

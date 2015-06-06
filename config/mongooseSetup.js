@@ -7,6 +7,7 @@ var fs = require('fs');
 var Promise = require('bluebird');
 
 exports.setup = function(app) {
+	/*
 	var databaseUrl = 'production' == app.get('env') && !!process.env.DB
 		? process.env.DATABASE_URL
 		: 'mongodb://localhost/hsnumc';
@@ -21,4 +22,5 @@ exports.setup = function(app) {
 
 	});
 	console.log(clc.greenBright('[MongoDb] -'),' mongoose is up');
+	*/
 };
