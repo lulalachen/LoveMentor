@@ -18,6 +18,7 @@ exports.setup = function(app) {
 	filenames.forEach( function (filename) {
 		require('../models/' + filename);
 		console.log(clc.blue('[MongoDb] -'),' model ' + filename.split('.')[0] + ' is included');
+
 	});
 	console.log(clc.greenBright('[MongoDb] -'),' mongoose is up');
 };
