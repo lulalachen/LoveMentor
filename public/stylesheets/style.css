@@ -1,9 +1,10 @@
 html, body{
-  width: 100%;
-  height: 100%;
-  min-width: 500px;
-  min-height: 500px;
-  overflow: hidden;
+	font-family:  'Poiret One', 'Bad Script' ,'Marck Script', 'Fredericka the Great';
+	width: 100%;
+	height: 100%;
+	min-width: 500px;
+	min-height: 500px;
+	overflow: hidden;
 }
 
 /* Background */
@@ -22,24 +23,32 @@ html, body{
 
 .word2 {
 	position: absolute;
-	top: 51%;
-	left: 51.5%;
+	top: 39%;
+	left: 48.5%;
 	color: white;
+	font-family: 'Amatic SC';
+	font-size: 100px;
 	margin-top: -30px;
 	margin-left: -50px;
 }
 
-
 .loginFrame {
-	display: inline;
 	position: relative;
-	top: 40%;
-	left: 35%;
 	color: white;
 	border: 3px solid white;
 	border-radius: 10px;
-	padding: 6% 5% 4% 5%;
+	padding: 4% 5% 4% 5%;
+	margin: 15% 25%; 
+	text-align: center;
+}
 
+.loginTitle {
+	text-align: center;
+	font-size: 80px;
+}
+
+.fa {
+	margin: 0 10px !important;
 }
 
 .fa:hover { 
@@ -59,14 +68,63 @@ html, body{
 
 
 
+/* Search Lists */
+.searchFrame {
+	position: relative;
+	color: white;
+	border: 3px solid white;
+	border-radius: 10px;
+	padding: 2% 5% 4% 5%;
+	margin: 5% 25% 15% 25%; 
+	text-align: center;
+}
 
+.searchTitle {
+	text-align: center;
+	font-size: 80px;
+}
+
+
+.searchScroll {
+	overflow: scroll;
+	padding: 3% 5%; 
+}
+
+.searchRoll {
+	display: inline-flex;
+	height: 100%;
+	width: 100%;
+}
+
+.searchRoll > .photo {
+	position: relative;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 60px;
+	width: 60px;
+}
+
+.searchRoll > .name {
+	position: relative;
+	padding: 20px;
+}
+
+.searchRoll > .submit {
+	position: relative;
+	padding: 20px;
+	float:right ;
+}
+
+.search
 /* Loading Effect */
  
 .word {
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	top: 36%;
+	left: 45%;
+	font-family: 'Amatic SC';
 	color: white;
+	font-size: 80px;
 	margin-top: -30px;
 	margin-left: -50px;
 	animation: heart-anim 1s linear .4s infinite;
@@ -82,63 +140,63 @@ html, body{
 }
 
 .heart {
-  position: absolute;
-  width: 100px;
-  height: 90px;
-  top: 50%;
-  left: 50%;
-  margin-top: -45px;
-  margin-left: -50px;
+	position: absolute;
+	width: 100px;
+	height: 90px;
+	top: 50%;
+	left: 50%;
+	margin-top: -45px;
+	margin-left: -50px;
+	transform: scale(3);
 }
 .heart:before,
 .heart:after {
-  position: absolute;
-  content: "";
-  left: 50px;
-  top: 0;
-  width: 50px;
-  height: 80px;
-  background: #fc2e5a;
-  border-radius: 50px 50px 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
+	position: absolute;
+	content: "";
+	left: 50px;
+	top: 0;
+	width: 50px;
+	height: 80px;
+	background: #fc2e5a;
+	border-radius: 50px 50px 0 0;
+	transform: rotate(-45deg);
+	transform-origin: 0 100%;
 }
 .heart:after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin :100% 100%;
+	left: 0;
+	transform: rotate(45deg);
+	transform-origin :100% 100%;
 }
 .heart1{
-   animation: heart-anim 1s linear .4s infinite;
+	animation: heart-anim 1s linear .4s infinite;
 }
 .heart2{
-   animation: pounding .5s linear infinite alternate;
+	animation: pounding .5s linear infinite alternate;
 }
 .heart1:after, .heart1:before{
   background-color: #ff7693;
 }
 
 @keyframes pounding{
-  0%{ transform: scale(1.5); }
-  100%{ transform: scale(1.1); }
+  0%{ transform: scale(4.5); }
+  100%{ transform: scale(3.3); }
 }
 @keyframes heart-anim {
   46% {
-
-    transform: scale(1.1);
+	transform: scale(3.3);
   }
   50% {
-    transform: scale(1.3);
+	transform: scale(3.9);
   }
   52% {
-    transform: scale(1.5);
+	transform: scale(4.5);
   }
   55% {
-    transform: scale(3);
+	transform: scale(9);
   }
   100% {
-    opacity: 0;
-    transform: scale(50);
+	opacity: 0;
+	transform: scale(150);
   }
 }
 
@@ -154,4 +212,8 @@ footer {
 	right: 1%;
 	z-index: 9000;
 	color: white;
+	text-align: right;
+	transform-origin: 160px 20px;
+	transform: scale(2.5);	
+	font-family: 'Amatic SC';
 }

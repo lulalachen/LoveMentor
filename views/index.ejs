@@ -2,6 +2,7 @@
 <html ng-app="ngIndex">
 	<head>
 		<title>Love Mentor</title>
+		<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Poiret+One|Bad+Script|Marck+Script|Raleway:400,100|Amatic+SC' rel='stylesheet' type='text/css'>
 		<link rel='stylesheet' href='/stylesheets/style.css' />
 		<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.css">
 
@@ -11,20 +12,30 @@
 		<div class="contentFrame" id="content" ng-init="startBlock = true"> 
 			<div class="start" ng-show="startBlock" ng-click="start()">
 				<div class="heart large" ></div>
-				<div class="word2">START!</div>
+				<div class="word2">START</div>
 			</div>
 			<div class="loginFrame" ng-show="loginBlock">
-				<i class="fa fa-facebook-official fa-4x" ng-click="login('fb');"></i>
-				<i class="fa fa-wechat fa-4x" ng-click="login('wechat');"></i>		
-				<i class="fa fa-renren fa-4x" ng-click="login('ren');"></i>
+				<div class="loginTitle">Login With</div>
+				<i class="fa fa-facebook-official fa-5x" ng-click="login('fb');"></i>
+				<i class="fa fa-wechat fa-5x" ng-click="login('wechat');"></i>		
+				<i class="fa fa-renren fa-5x" ng-click="login('ren');"></i>
 			</div>
 
-			<div class="friendList" ng-show="friendBlock">
-			powekfw
+			<div class="searchFrame" ng-show="friendBlock">
+				<div class="searchTitle"> {{ app }}</div>
+				<div class="searchScroll">
+					<div class="searchRoll" ng-repeat="friend in friends">
+						<div class="photo" style="background:url('//graph.facebook.com/{{friend.fbId}}/picture?width=60')" ></div>
+						<div class="name" ng-bind="friend.name"></div>
+						<div class="submit" ng-click="submit('friend.fbId')">Submit</div>
+					</div>
+				</div>
 
 			</div>
 
 		</div>
+
+
 
 		<div loading-indicator id="in" class="loading">
 		    <div class="heart heart1"></div>
@@ -39,5 +50,10 @@
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
 		<script src="javascripts/angular.min.js" type="text/javascript"></script>
 		<script src="javascripts/index.js" type="text/javascript"></script>
+		<script type="text/javascript" src="http://connect.facebook.net/zh_TW/all.js"></script>
+		<script src="javascripts/fb_utils.js"></script>
+		<script>
+			FBinit();
+		</script>
 	</body>
 </html>
