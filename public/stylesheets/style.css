@@ -86,13 +86,16 @@ html, body{
 
 
 .searchScroll {
-	overflow: scroll;
-	padding: 3% 5%; 
+	overflow-y: scroll;
+	padding: 3% 8%; 
+	height: 320px;
+	border: 3px solid rgba(255,255,255,0.7);
+	border-radius: 4px;
+	box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.2);
 }
 
 .searchRoll {
 	display: inline-flex;
-	height: 100%;
 	width: 100%;
 }
 
@@ -111,11 +114,25 @@ html, body{
 
 .searchRoll > .submit {
 	position: relative;
-	padding: 20px;
-	float:right ;
+	padding: 10px;
+	margin: 10px 0px;
+	border-radius: 3px;
+	border: 1px solid white;
+	clear: left;
+	animation: shm 1s ease-in-out infinite;
+	cursor: pointer;
 }
 
-.search
+.searchRoll > .submit:hover {
+	background-color: rgba(255,255,255,0.2);
+}
+
+
+@keyframes shm{
+	0% {margin-left: 0px;}
+	50% {margin-left: 120px;}
+	100% {margin-left: 0px;}
+}
 /* Loading Effect */
  
 .word {
