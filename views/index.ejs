@@ -15,20 +15,38 @@
 				<div class="word2">START</div>
 			</div>
 			<div class="loginFrame" ng-show="loginBlock">
-				<div class="loginTitle">Login With</div>
+				<div class="loginTitle" ng-click="getInbox()">Login With</div>
 				<i class="fa fa-facebook-official fa-5x" ng-click="login('fb');"></i>
 				<i class="fa fa-wechat fa-5x" ng-click="login('wechat');"></i>		
 				<i class="fa fa-renren fa-5x" ng-click="login('ren');"></i>
 			</div>
 
-			<div class="searchFrame" ng-show="friendBlock">
+			<div class="searchFrame" ng-show="friendBlock" ng-init="searching = false; done=false">
 				<div class="searchTitle"> {{ app }}</div>
-				<div class="searchScroll">
-					<div class="searchRoll" ng-repeat="friend in friends">
-						<div class="photo" style="background:url('//graph.facebook.com/{{friend.fbId}}/picture?width=60')" ></div>
-						<div class="name" ng-bind="friend.name"></div>
-						<div class="submit" ng-click="submit('friend.fbId')">Submit</div>
+				<div class="searchScroll" ng-show="!searching && !done">
+					<div class="searchFilter">
+						<input type="text" name="friend" ng-model="friendName">
+						<i class="fa fa-search"></i>
 					</div>
+					<div class="searchRoll" ng-repeat="friend in friends | filter : friendName">
+						<!-- <div class="photo" style="background:url('//graph.facebook.com/{{friend.fbId}}/picture?width=60')" ></div> -->
+						<div class="photo" style="background:url({{friend.photo}})"></div>
+						<div class="name" ng-bind="friend.name"></div>
+						<div class="submit" ng-click="submit(friend); searching = true;">Submit</div>
+					</div>
+					<div class="more" ng-click="moreFriends()">{{friends.length === 0 && 'Search' || 'More'}}</div>
+				</div>
+				<div class="searchScroll" ng-show="searching || done">
+
+					<div class="name" ng-bind="submitFriend.name"></div>
+
+					<div class="msgRoll" ng-class="{'left':msg.isFriend; 'right':!msg.isFriend;}" ng-repeat="msg in messages | filter : submitFriend.name">
+						<div class="photo" style="background:url({{submitFriend.photo}})"></div>
+						<div class="msg" ng-bind="msg.message"></div>
+						
+					    <div class="heart" ng-show="searching && !done"></div>
+					</div>
+
 				</div>
 
 			</div>
