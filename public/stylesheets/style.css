@@ -5,6 +5,63 @@ html, body{
   min-height: 500px;
   overflow: hidden;
 }
+
+/* Background */
+
+.contentFrame {
+	background-color: rgba(22,160,133, 0.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 900; /* it's over 9000!!! */
+	display: none;
+	transition: all 1s ease-in-out;
+}
+
+.word2 {
+	position: absolute;
+	top: 51%;
+	left: 51.5%;
+	color: white;
+	margin-top: -30px;
+	margin-left: -50px;
+}
+
+
+.loginFrame {
+	display: inline;
+	position: relative;
+	top: 40%;
+	left: 35%;
+	color: white;
+	border: 3px solid white;
+	border-radius: 10px;
+	padding: 6% 5% 4% 5%;
+
+}
+
+.fa:hover { 
+	color: rgba(1,1,1,0.7);
+	transition: all 0.1s ease-in-out;
+
+}
+
+.changePage {
+	animation: changePage 1s ease-in-out ;
+}
+
+@keyframes changePage{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(5000px); opacity: 0 ;}
+}
+
+
+
+
+/* Loading Effect */
+ 
 .word {
 	position: absolute;
 	top: 50%;
@@ -14,9 +71,16 @@ html, body{
 	margin-left: -50px;
 	animation: heart-anim 1s linear .4s infinite;
 }
-.loadingPleaseWait {
+.loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9001; /* it's over 9000!!! */
 	display: none;
 }
+
 .heart {
   position: absolute;
   width: 100px;
@@ -76,4 +140,18 @@ html, body{
     opacity: 0;
     transform: scale(50);
   }
+}
+
+
+
+
+
+/* Footer */
+
+footer { 
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+	z-index: 9000;
+	color: white;
 }
