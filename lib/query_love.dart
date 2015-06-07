@@ -5,17 +5,22 @@ import "dart:io";
 import "dart:convert";
 import "package:stream/stream.dart";
 import 'point.dart';
-import 'muti_classifier';
+import 'muti_classifier.dart';
 
 Future queryLove(HttpConnect connect) {
   return readAsString(connect.request)
   .then((_) {
-    List sample = JSON.decode(_);
+    Map sample = JSON.decode(_);
     //get feature
     List x_tmp = new List(21);
-    x_tmp = 0;
+    List<Point21> trainData;
     for (int j = 0; j < 21; j++) {
-      x_tmp[j] += ((sample['context'])[j]) - '0'; 
+      x_tmp[j] = 0;
+      int len = sample['context'][j].length;
+      for (int k = 0; k < len ; k++) {
+         x_tmp[j] += sample['context'][j][k];
+      }
+      trainData[j] = new Point21(x_tmp, sample['label']);
     }
     Point21 data = new Point21(x_tmp, 0);
     File myFile = new File('file.txt');
