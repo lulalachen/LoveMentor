@@ -77,6 +77,8 @@ html, body{
 	padding: 2% 5% 4% 5%;
 	margin: 5% 25% 15% 25%; 
 	text-align: center;
+	border: 3px solid rgba(255,255,255,0.7);
+	box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.2);
 }
 
 .searchTitle {
@@ -174,26 +176,32 @@ html, body{
 	width: 100%;	
 }
 
-.msgRoll > .left {
-	text-align: left;
-
-
+.top {
+	position: absolute;
+	bottom: 12%;
+	right: 15%;
+	font-size: 4em;
+	opacity: 0.7;
+	transition: all 0.3s ease-in;
 }
 
-.msgRoll > .contentLeft {
-	text-align: left;
-	color: black;
+.topScroll {
+	opacity: 0 !important;
 }
 
-.msgRoll > .right {
-	text-align: right;
-
+.backward {
+	position: absolute;
+	border: 1px solid white;
+	border-radius: 3px;
+	padding: 1px 6px;
+}
+.backward:hover {
+	background-color: rgba(255,255,255,0.3);
 }
 
-.msgRoll > .contentRight {
+.backward > i {
+	margin: 3px 5px 3px 0 !important;
 }
-
-
 
 @keyframes shm{
 	0% {margin-left: 0px;}
@@ -319,6 +327,31 @@ html, body{
 	50% { transform: scale(3.2); opacity: 0.4;}
 	100% { transform: scale(3); opacity: 0.2;}
 }*/
+
+/* Results */
+.liquidFillGaugeText {
+    font-family: Helvetica; 
+    font-weight: bold; 
+}
+#heart {
+    position: absolute;
+    width: 280px;
+    height: 250px;
+    //margin-left: -10px;
+    //margin-top: 10px;
+}
+#result {
+    position: absolute;
+    background-color: white;
+    width: 280px;
+    height: 250px;
+    overflow: hidden;  
+    margin: 5% 10%;
+}
+#fillgauge1 {
+    margin-left: -10px;
+    margin-top: -15px;  
+}
 
 /* Footer */
 

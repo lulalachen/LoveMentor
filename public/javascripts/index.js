@@ -8,7 +8,7 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 		$('#in').fadeOut();
 		$('#content').fadeIn();
 		console.log('hee')
-	}, 1000);
+	}, 5000);
 
 	// Variables //
 	$scope.app = '';
@@ -114,35 +114,55 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 	}
 
 	$scope.moreFriends = function() {
-		$http.get($scope.nextFriend).success(function(response){
-			for (var i = 0; i < response.data.length; i++) {
-	        	$scope.friends.push({
-	        		fbId : response.data[i].id,
-	        		name : response.data[i].name,
-	        		photo : response.data[i].picture.data.url
-	        	});
-	        }
-	        $scope.nextFriend = response.paging.next
-		})
-		$timeout(function(){
-	        $scope.moreFriends();
-	    },1000)
+		if( $scope.nextFriend !== ''){
+			$http.get($scope.nextFriend).success(function(response){
+				for (var i = 0; i < response.data.length; i++) {
+		        	$scope.friends.push({
+		        		fbId : response.data[i].id,
+		        		name : response.data[i].name,
+		        		photo : response.data[i].picture.data.url
+		        	});
+		        }
+		        $scope.nextFriend = response.paging.next
+		        $scope.moreFriends();
+			})
+		}
 	}
 
  	$scope.submit = function(friend) {
 
  		$scope.searching = true;
- 		$('.searchScroll').addClass('flip');
 		$scope.submitFriend = friend;
 		$scope.getInbox(friend.name);
+
 		$timeout(function() {
 			$scope.searching = false;
-	 		$('.searchScroll').removeClass('flip');
+			$scope.done = true;
 			console.log(friend)
+
 		}, 3000);
-		$scope.done = true;
+		
+		var level = Math.floor(Math.random()*10000%100);
+
+		var config1 = liquidFillGaugeDefaultSettings();
+		    config1.textColor = "#FF4444";
+		    config1.waveTextColor = "#FFAAAA";
+		    config1.waveColor = "#FFDDDD";
+		    config1.textVertPosition = 0.6;
+		    config1.waveAnimateTime = 700;
+		    loadLiquidFillGauge("fillgauge1", level, config1);
+
  	}
 
+ 	$scope.scrollTop = function(){
+ 		$('#friendList').animate({ scrollTop: 0 }, "slow");
+
+ 	}
+ 	$scope.backward = function(){
+		$('#fillgauge1').empty();
+ 		$scope.searching = false; 
+ 		$scope.done = false;
+ 	}
 
 	$scope.getInbox = function(name){
 		selectedName = name || "王瘀青";
