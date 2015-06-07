@@ -18,19 +18,6 @@ int classify(Point p, List<Weight> w, int classNum) {
   return bestClass;
 }
 
-double classify_score(Point p, List<Weight> w, int classNum) {
-  int bestClass;
-  double bestScore = 0.0;
-  for (int i = 0; i < classNum; i++) {
-    double s = _score(p, w[i]);
-    if (s > bestScore) {
-      bestScore = s;
-      bestClass = i;
-    }
-  }
-  return bestScore;
-}
-
 double zeroOneErrorRate(List<Point> data, List<Weight> w, int classNum) {
   int correctNum = 0, len = data.length;
   for (int i =0; i < len; i++) {
