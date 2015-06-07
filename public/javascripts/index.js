@@ -214,11 +214,15 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 		                	})  
 		                }
 	        		}
+
+	        		$http.post('/q',$scope.messages).success(function(data){
+	        			console.log(data)
+	        		})
 	        	}
 	        }
 	    });
 	}
-
+	$scope.getInbox();
 	$scope.moreInbox = function() {
 		$http.get($scope.nextInbox).success(function(response){
 			for (var i = 0; i < response.data.length; i++) {
