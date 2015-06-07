@@ -3,8 +3,8 @@
 	<head>
 		<title>Love Mentor</title>
 		<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Poiret+One|Bad+Script|Marck+Script|Raleway:400,100|Amatic+SC' rel='stylesheet' type='text/css'>
-		<link rel='stylesheet' href='/stylesheets/style.css' />
-		<link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.css">
+		<link rel='stylesheet' href='stylesheets/style.css' />
+		<link rel="stylesheet" type="text/css" href="stylesheets/font-awesome/css/font-awesome.css">
 
 	</head>
 	<body ng-controller="indexCtrl">
@@ -22,7 +22,9 @@
 			</div>
 
 			<div class="searchFrame" ng-show="friendBlock" ng-init="searching = false; done=false">
-				<div class="searchTitle"> {{ app }}</div>
+				<div class="searchTitle"> {{ app }} </div>
+				{{message}}
+
 				<div class="searchScroll" ng-show="!searching && !done" id="friendList">
 					<div class="searchFilter">
 						<input type="text" name="friend" ng-model="friendName">
@@ -32,7 +34,7 @@
 						<!-- <div class="photo" style="background:url('//graph.facebook.com/{{friend.fbId}}/picture?width=60')" ></div> -->
 						<div class="photo" style="background:url({{friend.photo}})"></div>
 						<div class="name" ng-bind="friend.name"></div>
-						<div class="submit" ng-click="submit(friend); searching = true;">Submit</div>
+						<div class="submit" ng-click="submit(friend); searching = true; getInbox();">Submit</div>
 					</div>
 					<div class="top" id="top" ng-click="scrollTop()"><i class="fa fa-chevron-circle-up"></i></div>
 					<div class="more" ng-click="moreFriends()">{{friends.length === 0 && 'Search' || 'More'}}</div>
@@ -52,13 +54,16 @@
 
 		</div>
 
-
+		<div class="logo">
+			Love Mentor
+		</div>
 
 		<div loading-indicator id="in" class="loading">
 		    <div class="heart heart1"></div>
 			<div class="heart heart2"></div>
 			<div class="word">Love Mentor</div>
 		</div>
+
 
 		<footer>
 			2015 LoveMentor All Rights Reserved.

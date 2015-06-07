@@ -7,6 +7,16 @@ html, body{
 	overflow: hidden;
 }
 
+.logo {
+	font-family: 'Marck Script';
+	position: absolute;
+	top: 2%;
+	left: 2%;
+	z-index: 9000;
+	font-size: 3em;
+	color: white;
+}
+
 /* Background */
 
 .contentFrame {

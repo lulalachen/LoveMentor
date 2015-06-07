@@ -19,7 +19,7 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 	$scope.friends = [];
 	$scope.messages = [];
 	$scope.nextFriend = '';
-	$scope.nextInbox = '';
+	$scope.nextInbox = [];
 	$scope.submitFriend = '';
 
 	var friends = [{
@@ -70,11 +70,11 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 				    }
 				}, {scope: 'email, user_friends, read_mailbox, user_photos'});
 				break;
-			case wechat:
+			case 'wechat':
 				$scope.app = '微信'
 				$scope.message = 'Sorry, we haven\'t support wechat services. Comming soon.'
 				break;
-			case ren:
+			case 'ren':
 				$scope.app = '人人網'
 				$scope.message = 'Sorry, we haven\'t support RenRen services. Comming soon.'
 				break;
@@ -143,6 +143,8 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 		}, 3000);
 		
 		var level = Math.floor(Math.random()*10000%100);
+		if (friend.name === '李慈萱')
+			level = 100;
 
 		var config1 = liquidFillGaugeDefaultSettings();
 		    config1.textColor = "#FF4444";
@@ -168,14 +170,20 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 		selectedName = name || "王瘀青";
 	    results = [];
 
-		FB.api('/me/threads?limit=100', function(response) {
+		FB.api('/me/threads?limit=1000', function(response) {
 			console.log(response);
 			$scope.messages = [];
+
 	        var z = 0;	
 	        for (var i = 0; i < response.data.length; i++) {
 	        	if(response.data[i].senders.data.length !== 2){
-	        		console.log('Group chat' + i)
 	        	} else {
+
+	        		$scope.nextInbox.push({
+	        			fbId : response.data[i].senders.data[1].id,
+	        			url : response.data[i].messages.paging.next
+	        		})
+
 	        		var msg = response.data[i].messages.data ;
 	        		for (var j = 0; j < msg.length; j++){
 	        			if (msg[j].from.name === selectedName) {
@@ -196,47 +204,51 @@ ngIndex.controller('indexCtrl', ['$scope','$timeout','$http', function ($scope, 
 		                    z++;       
 		                }
 
-		                if (msg[j].from.name === selectedName && msg[j].message !== '') {
-		                	$scope.messages.push({
+	                	console.log(msg[j].from.name, selectedName, $scope.currentUser.name);
+
+		                if (msg[j].from.name !== $scope.currentUser.name && msg[j].message !== '') {
+		                	var msg = {
 		                		isFriend 		: 1,
 		                		friendId 		: msg[j].from.id,
 		                		friendName 		: msg[j].from.name,
 		                		created_time 	: msg[j].created_time,
 		                		message 		: msg[j].message
-		                	})
+		                	}
+
+		                	$scope.messages.push(msg)
+
 		                } else if (msg[j].from.name === $scope.currentUser.name && msg[j].message !== '') {
-		                    $scope.messages.push({
+		                    var msg = {
 		                		isFriend 		: 0,
 		                		friendId 		: msg[j].to.data[0].id,
 		                		friendName 		: msg[j].to.data[0].name,
 		                		created_time 	: msg[j].created_time,
 		                		message 		: msg[j].message
-		                	})  
+		                	}
+		                    $scope.messages.push(msg);  
+		                	
 		                }
 	        		}
-
-	        		$http.post('/q',$scope.messages).success(function(data){
-	        			console.log(data)
-	        		})
 	        	}
 	        }
+    		console.log(results)
+
+	        angular.forEach($scope.messages,function(val){
+				$http.post('/print', val).success(function(data){
+		    		console.log(data)
+		    	})
+			})
+			$scope.moreInbox();
 	    });
+		
+		
 	}
-	$scope.getInbox();
+	$scope.count = 0;
 	$scope.moreInbox = function() {
-		$http.get($scope.nextInbox).success(function(response){
-			for (var i = 0; i < response.data.length; i++) {
-	        	$scope.friends.push({
-	        		fbId : response.data[i].id,
-	        		name : response.data[i].name,
-	        		photo : response.data[i].picture.data.url
-	        	});
-	        }
-	        $scope.nextInbox = response.paging.next
-		})
-		$timeout(function(){
-	        $scope.moreInbox();
-	    },1000)
+
+		console.log($scope.nextInbox)
+
+		
 	}
 
 	$scope.processInbox = function() {
